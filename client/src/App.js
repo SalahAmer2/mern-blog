@@ -1,10 +1,18 @@
 import React from 'react';
+// import { Switch, Route } from 'react-router-dom';
+
+import {Navbar} from './components/navbar.component';
+import {Home} from './components/home.component';
+import {Footer} from './components/footer.component';
 
 import './App.css';
 
 function App() {
   return (
     <div>
+      <Navbar />
+      <Home />
+      <Footer />
       {/* <nav className="navbar navbar-default">
         <div className="container">
           <div className="navbar-header">
