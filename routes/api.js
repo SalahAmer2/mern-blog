@@ -25,20 +25,24 @@ const Post = require('../models/blogPost');
 //     res.render("compose");
 // });
 
-// router.post("/compose", function (req, res) {
-//     const post = new Post({
-//         title: req.body.postTitle,
-//         content: req.body.postBody
-//     });
+router.post("/compose", function (req, res) {
+    // const post = new Post({
+    //     title: req.body.postTitle,
+    //     content: req.body.postBody
+    // });
 
-//     post.save(function (err) {
+    // post.save(function (err) {
 
-//         if (!err) {
-//             res.redirect("/");
-//         }
-//     });
+    //     if (!err) {
+    //         res.redirect("/");
+    //     }
+    // });
 
-// });
+    console.log('Body', req.body);
+    res.json({
+        msg: 'We received your data'
+    });
+});
 
 // router.get("/posts/:postId", function (req, res) {
 //     const requestedPostId = req.params.postId;//For some reason using lodash here for lowercase causes an error

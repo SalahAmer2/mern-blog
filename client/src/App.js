@@ -1,8 +1,11 @@
 import React from 'react';
-// import { Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import {Navbar} from './components/navbar.component';
 import {Home} from './components/home.component';
+import {About} from './components/about.component';
+import {Contact} from './components/contact.component';
+import Compose from './components/compose.component';
 import {Footer} from './components/footer.component';
 
 import './App.css';
@@ -11,7 +14,12 @@ function App() {
   return (
     <div>
       <Navbar />
-      <Home />
+      <Switch>
+        <Route exact path='/' component={Home} />
+        <Route path='/about' component={About} />
+        <Route path='/contact' component={Contact} />
+        <Route path='/compose' component={Compose} />
+      </Switch>
       <Footer />
       {/* <nav className="navbar navbar-default">
         <div className="container">
