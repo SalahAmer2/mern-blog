@@ -12,10 +12,10 @@ const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rho
 
 // app.set('view engine', 'ejs');
 
-const routes = require('./routes/api');
-
 const app = express();
 const PORT = process.env.PORT || 8080;
+
+const routes = require('./routes/api');
 
 // mongoose.connect('mongodb://localhost:27017/mern_blogDB', {
 //     useNewUrlParser: true,
@@ -39,7 +39,7 @@ app.use(express.urlencoded({ extended: false }));
 //HTTP request logger
 app.use(morgan('tiny'));
 
-app.use('/api', routes)
+app.use('/api', routes);
 
 app.listen(PORT, console.log(`Server starting at ${PORT}`));
 

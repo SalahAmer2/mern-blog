@@ -4,8 +4,44 @@ import axios from "axios";
 class Compose extends React.Component {
     state = {
         title: '',
-        content: ''
+        content: '',
+        posts: []
     };
+
+    // componentDidMount = () => {
+    //     this.getBlogPost();
+    // };
+
+    // getBlogPost = () => {
+    //     axios.get('/api/posts')
+    //         .then((response) => {
+    //             Post.findOne({ _id: requestedPostId }, function (err, post) {
+    //                 res.render("post", {
+    //                     title: post.title,
+    //                     content: post.content
+    //                 });
+    //             });
+    //         })
+    //         .catch(() => {
+    //             alert('Error retrieving data.')
+    //         });
+    // }
+
+    componentDidMount = () => {
+        this.getBlogPost();
+    };
+
+    getBlogPost = () => {
+        axios.get('/api')
+            .then((response) => {
+                const data = response.data;
+                this.setState({ posts: data })
+                console.log('Data has been received.')
+            })
+            .catch(() => {
+                alert('Error retrieving data.')
+            });
+    }
 
     handleChange = ({ target }) => {
         const { name, value } = target;
