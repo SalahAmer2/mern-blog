@@ -3,39 +3,42 @@ import axios from "axios";
 
 class Compose extends React.Component {
     state = {
-        postTitle: '',
-        postBody: ''
+        title: '',
+        content: ''
     };
 
-    handleChange = (event) => {
-        const target = event.target;
-        const name = target.name;
-        const value = target.value;
-
-        this.setState({
-            [name]: value
-        });
+    handleChange = ({ target }) => {
+        const { name, value } = target;
+        this.setState({ [name]: value });
     };
 
     submit = (event) => {
         event.preventDefault();
 
         const payload = {
-            title: this.state.postTitle,
-            body: this.state.postBody
+            title: this.state.title,
+            content: this.state.content
         }
 
         axios({
-            url: 'http://localhost:8080/api/compose',
+            url: '/api/save',
             method: 'POST',
             data: payload
         })
         .then(() => {
             console.log('Data has been sent to the server');
+            this.resetUserInputs();
         })
         .catch(() => {
             console.log('Internal server error');
         });
+    }
+
+    resetUserInputs = () => {
+        this.setState({
+            title: '',
+            content: ''
+        })
     }
 
     render() {
@@ -48,9 +51,9 @@ class Compose extends React.Component {
                 <form onSubmit={this.submit}>
                     <div className="form-group">
                         <label>Title</label>
-                        <input className="form-control" type="text" name="postTitle" value={this.state.title} onChange={this.handleChange} />
+                        <input className="form-control" type="text" name="title" value={this.state.title} onChange={this.handleChange} />
                         <label>Post</label>
-                        <textarea className="form-control" name="postBody" rows="5" cols="30" value={this.state.post} onChange={this.handleChange}></textarea>
+                        <textarea className="form-control" name="content" rows="5" cols="30" value={this.state.content} onChange={this.handleChange}></textarea>
                     </div>
                     <button className="btn btn-primary" type="submit" name="button">Publish</button>
                 </form>

@@ -25,7 +25,7 @@ const Post = require('../models/blogPost');
 //     res.render("compose");
 // });
 
-router.post("/compose", function (req, res) {
+router.post("/save", function (req, res) {
     // const post = new Post({
     //     title: req.body.postTitle,
     //     content: req.body.postBody
@@ -38,9 +38,20 @@ router.post("/compose", function (req, res) {
     //     }
     // });
 
-    console.log('Body', req.body);
-    res.json({
-        msg: 'We received your data'
+    const data = req.body;
+
+    const newBlogPost = new Post(data);
+
+    newBlogPost.save((error) => {
+        if (error) {
+            res.status(500).json({msg: 'Sorry, internal server error'});
+            return;
+        }
+        
+        //Blogpost
+        return res.json({
+            msg: 'Your data has been saved.'
+        });
     });
 });
 
