@@ -43,20 +43,20 @@ class Compose extends React.Component {
             });
     }
 
-    // getBlogPost = () => {
-    //     axios({
-    //         url: '/api',
-    //         method: 'GET'
-    //     })
-    //         .then((response) => {
-    //             const data = response.data;
-    //             this.setState({ posts: data })
-    //             console.log('Data has been received.')
-    //         })
-    //         .catch(() => {
-    //             alert('Error retrieving data.')
-    //         });
-    // }
+    getBlogPost = () => {
+        axios({
+            url: '/api',
+            method: 'GET'
+        })
+            .then((response) => {
+                const data = response.data;
+                this.setState({ posts: data })
+                console.log('Data has been received.')
+            })
+            .catch(() => {
+                alert('Error retrieving data.')
+            });
+    }
 
     handleChange = ({ target }) => {
         const { name, value } = target;
@@ -79,9 +79,10 @@ class Compose extends React.Component {
         .then(() => {
             console.log('Data has been sent to the server');
             this.resetUserInputs();
+            this.getBlogPost();
         })
         .catch(() => {
-            console.log('Internal server error');
+            console.log('Internal server error');//HERE'S The problem
         });
     }
 
