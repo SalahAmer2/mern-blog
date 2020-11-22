@@ -25,7 +25,37 @@ const Post = require('../models/blogPost');
 //     res.render("compose");
 // });
 
+// Routes
+router.get('/', (req, res) => {
+
+    Post.find({})
+        .then((data) => {
+            console.log('Data: ', data);
+            res.json(data);
+        })
+        .catch((error) => {
+            console.log('error: ', error);
+        });
+});
+
 router.post("/save", function (req, res) {
+    
+    const data = req.body;
+
+    const newBlogPost = new Post(data);
+
+    newBlogPost.save((error) => {
+        if (error) {
+            res.status(500).json({ msg: 'Sorry, internal server error' });
+            return;
+        }
+
+        //Blogpost
+        return res.json({
+            msg: 'Your data has been saved.'
+        });
+    });
+    
     // const post = new Post({
     //     title: req.body.postTitle,
     //     content: req.body.postBody
@@ -37,22 +67,6 @@ router.post("/save", function (req, res) {
     //         res.redirect("/");
     //     }
     // });
-
-    const data = req.body;
-
-    const newBlogPost = new Post(data);
-
-    newBlogPost.save((error) => {
-        if (error) {
-            res.status(500).json({msg: 'Sorry, internal server error'});
-            return;
-        }
-        
-        //Blogpost
-        return res.json({
-            msg: 'Your data has been saved.'
-        });
-    });
 });
 
 // router.get("/posts/:postId", function (req, res) {

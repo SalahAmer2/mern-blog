@@ -13,16 +13,20 @@ const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rho
 // app.set('view engine', 'ejs');
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 27017;
 
 const routes = require('./routes/api');
+
+const MONGODB_URI = 'mongodb+srv://admin-salah:BlazeBlastTest123@cluster0-7brkg.mongodb.net/userDB'
 
 // mongoose.connect('mongodb://localhost:27017/mern_blogDB', {
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true
 // })
 
-mongoose.connect("mongodb://localhost:27017/blogDB", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(MONGODB_URI || "mongodb://localhost:27017/blogDB", { useNewUrlParser: true, useUnifiedTopology: true });
+
+// mongoose.connect("mongodb://localhost/blogDB", { useNewUrlParser: true, useUnifiedTopology: true });
 
 // mongoose.connect("mongodb+srv://admin-salah:BlazeBlastTest123@cluster0-7brkg.mongodb.net/todolistDB", { 
 //     useNewUrlParser: true,
