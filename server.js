@@ -13,7 +13,8 @@ const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rho
 // app.set('view engine', 'ejs');
 
 const app = express();
-const PORT = process.env.PORT || 27017;
+// const PORT = process.env.PORT || 27017;
+const PORT = process.env.PORT || 5000;
 
 const routes = require('./routes/api');
 
@@ -26,7 +27,7 @@ const routes = require('./routes/api');
 
 // mongoose.connect(MONGODB_URI || "mongodb://localhost:27017/blogDB", { useNewUrlParser: true, useUnifiedTopology: true });
 
-mongoose.connect("mongodb://localhost/blogDB", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://salah:blogblastx@mernblog.7fkqk.mongodb.net/mernblog?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
 
 // mongoose.connect("mongodb+srv://admin-salah:BlazeBlastTest123@cluster0-7brkg.mongodb.net/todolistDB", { 
 //     useNewUrlParser: true,
