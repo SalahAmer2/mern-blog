@@ -3,11 +3,11 @@ import axios from "axios";
 
 import { connect } from "react-redux";
 
-import { currentBlogTitle, currentBlogContent, currentBlogPosts } from "../redux/blogData/blogData.actions";
+// import { currentBlogTitle, currentBlogContent, currentBlogPosts } from "../redux/blogData/blogData.actions";
 
 // import { currentBlogTitle } from "../redux/blogData/blogData.actions";
 // import { currentBlogContent } from "../redux/blogData/blogData.actions";
-// import { currentBlogPosts } from "../redux/blogData/blogData.actions";
+import { currentBlogPosts } from "../redux/blogData/blogData.actions";
 
 
 class Compose extends React.Component {
@@ -63,20 +63,30 @@ class Compose extends React.Component {
     submit = (event) => {
         event.preventDefault();
 
-        this.props.currentBlogTitle(
-            this.title.current.value
-        )
+        // this.props.currentBlogTitle(
+        //     this.title.current.value + ''
+        // )
 
-        this.props.currentBlogContent(
-            this.content.current.value
-        )
+        // this.props.currentBlogContent({
+        //     content: this.content.current.value + ''
+        // })
+
+        // this.props.currentBlogPosts_Action(
+        //     [
+        //         //...this.props.currentBlogPosts,
+        //         {
+        //             title: this.props.currentBlogTitle,
+        //             content: this.props.currentBlogContent.content
+        //         }
+        //     ]
+        // )
 
         this.props.currentBlogPosts_Action(
             [
-                //...this.props.currentBlogPosts,
+                ...this.props.currentBlogPosts,
                 {
-                    title: this.props.currentBlogTitle.title,
-                    content: this.props.currentBlogContent.content
+                    title: this.title.current.value,
+                    content: this.content.current.value
                 }
             ]
         )
@@ -138,8 +148,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    currentBlogTitle: (blogTitle) => dispatch(currentBlogTitle(blogTitle)),
-    currentBlogContent: (blogContent) => dispatch(currentBlogContent(blogContent)),
+    // currentBlogTitle: (blogTitle) => dispatch(currentBlogTitle(blogTitle)),
+    // currentBlogContent: (blogContent) => dispatch(currentBlogContent(blogContent)),
     currentBlogPosts_Action: (blogPosts) => dispatch(currentBlogPosts(blogPosts))
 });
 
