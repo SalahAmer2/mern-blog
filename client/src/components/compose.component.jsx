@@ -1,16 +1,22 @@
 import React from 'react';
 import axios from "axios";
 
-class Compose extends React.Component {
-    state = {
-        title: '',
-        content: '',
-        posts: []
-    };
+import { connect } from "react-redux";
 
-    // componentDidMount = () => {
-    //     this.getBlogPost();
-    // };
+import { currentBlogTitle, currentBlogContent, currentBlogPosts } from "../redux/blogData/blogData.actions";
+
+// import { currentBlogTitle } from "../redux/blogData/blogData.actions";
+// import { currentBlogContent } from "../redux/blogData/blogData.actions";
+// import { currentBlogPosts } from "../redux/blogData/blogData.actions";
+
+
+class Compose extends React.Component {
+    constructor() {
+        super();
+
+        this.title = React.createRef();
+        this.content = React.createRef();
+    }
 
     // getBlogPost = () => {
     //     axios.get('/api/posts')
@@ -27,75 +33,86 @@ class Compose extends React.Component {
     //         });
     // }
 
-    componentDidMount = () => {
-        this.getBlogPost();
-    };
+    // componentDidMount = () => {
+    //     this.getBlogPost();
+    // };
 
-    getBlogPost = () => {
-        axios.get('/api')
-            .then((response) => {
-                const data = response.data;
-                this.setState({ posts: data })
-                console.log('Data has been received.')
-            })
-            .catch(() => {
-                alert('Error retrieving data.')
-            });
-    }
+    // getBlogPost = () => {
+    //     axios.get('/api')
+    //         .then((response) => {
+    //             const data = response.data;
+    //             this.props.currentBlogPosts(
+    //                 [
+    //                     ...this.props.currentBlogPosts,
+    //                     ...data
+    //                 ]
+    //             )
+    //             console.log('Data has been received.')
+    //         })
+    //         .catch(() => {
+    //             alert('Error retrieving data.')
+    //         });
+    // }
 
-    getBlogPost = () => {
-        axios({
-            url: '/api',
-            method: 'GET'
-        })
-            .then((response) => {
-                const data = response.data;
-                this.setState({ posts: data })
-                console.log('Data has been received.')
-            })
-            .catch(() => {
-                alert('Error retrieving data.')
-            });
-    }
-
-    handleChange = ({ target }) => {
-        const { name, value } = target;
-        this.setState({ [name]: value });
-    };
+    // handleChange = ({ target }) => {
+    //     this.props.currentBlogTitle(
+    //         target.value
+    //     )
+    // };
 
     submit = (event) => {
         event.preventDefault();
 
-        const payload = {
-            title: this.state.title,
-            content: this.state.content
-        }
+        this.props.currentBlogTitle(
+            this.title.current.value
+        )
 
-        axios({
-            url: '/api/save',
-            method: 'POST',
-            data: payload
-        })
-        .then(() => {
-            console.log('Data has been sent to the server');
-            this.resetUserInputs();
-            this.getBlogPost();
-        })
-        .catch(() => {
-            console.log('Internal server error');//HERE'S The problem
-        });
+        this.props.currentBlogContent(
+            this.content.current.value
+        )
+
+        this.props.currentBlogPosts_Action(
+            [
+                //...this.props.currentBlogPosts,
+                {
+                    title: this.props.currentBlogTitle.title,
+                    content: this.props.currentBlogContent.content
+                }
+            ]
+        )
+
+        // const payload = {
+        //     title: this.props.currentBlogTitle,
+        //     content: this.props.currentBlogContent
+        // }
+
+        // axios({
+        //     url: '/api/save',
+        //     method: 'POST',
+        //     data: payload
+        // })
+        // .then(() => {
+        //     console.log('Data has been sent to the server');
+        //     // this.resetUserInputs();
+        //     // this.getBlogPost();
+        //     this.props.currentBlogPosts(
+        //         payload
+        //     )
+        // })
+        // .catch(() => {
+        //     console.log('Internal server error');
+        // });
     }
 
-    resetUserInputs = () => {
-        this.setState({
-            title: '',
-            content: ''
-        })
-    }
+    // resetUserInputs = () => {
+    //     this.props.currentBlogTitle('')
+
+    //     this.props.currentBlogContent('')
+    // }
 
     render() {
 
-        console.log('State: ', this.state);
+        console.log('State: ', this.props.currentBlogPosts);
 
         return(
             <div className="container">
@@ -103,9 +120,9 @@ class Compose extends React.Component {
                 <form onSubmit={this.submit}>
                     <div className="form-group">
                         <label>Title</label>
-                        <input className="form-control" type="text" name="title" value={this.state.title} onChange={this.handleChange} />
+                        <input className="form-control" type="text" name="title" ref={this.title} />
                         <label>Post</label>
-                        <textarea className="form-control" name="content" rows="5" cols="30" value={this.state.content} onChange={this.handleChange}></textarea>
+                        <textarea className="form-control" name="content" rows="5" cols="30" ref={this.content}></textarea>
                     </div>
                     <button className="btn btn-primary" type="submit" name="button">Publish</button>
                 </form>
@@ -114,4 +131,16 @@ class Compose extends React.Component {
     }
 }
 
-export default Compose;
+const mapStateToProps = state => ({
+    currentBlogTitle: state.blogData.currentBlogTitle,
+    currentBlogContent: state.blogData.currentBlogContent,
+    currentBlogPosts: state.blogData.currentBlogPosts
+});
+
+const mapDispatchToProps = dispatch => ({
+    currentBlogTitle: (blogTitle) => dispatch(currentBlogTitle(blogTitle)),
+    currentBlogContent: (blogContent) => dispatch(currentBlogContent(blogContent)),
+    currentBlogPosts_Action: (blogPosts) => dispatch(currentBlogPosts(blogPosts))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Compose);

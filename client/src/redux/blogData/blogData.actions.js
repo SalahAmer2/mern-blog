@@ -1,16 +1,21 @@
 import { BlogDataActionTypes } from "./blogData.types";
 
+// export const currentBlogTitle = blogData => ({
+//     type: BlogDataActionTypes.BLOG_DATA,
+//     payload: blogData
+// }) <-This Instead?
+
 export const currentBlogTitle = blogTitle => ({
     type: BlogDataActionTypes.TITLE,
     payload: blogTitle
 })
 
 export const currentBlogContent = blogContent => ({
-    type: BlogDataActionTypes.TITLE,
+    type: BlogDataActionTypes.CONTENT,
     payload: blogContent
 })
 
-export const currentBlogContent = blogPosts => ({
+export const currentBlogPosts = blogPosts => ({
     type: BlogDataActionTypes.POSTS,
     payload: blogPosts
 })

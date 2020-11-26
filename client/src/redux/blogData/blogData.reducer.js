@@ -18,7 +18,7 @@ const BlogDataReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 content: action.payload
             }
-        case BlogDataActionTypes.POSTS:
+    case BlogDataActionTypes.POSTS:
             return {
                 ...state,
                 posts: action.payload
