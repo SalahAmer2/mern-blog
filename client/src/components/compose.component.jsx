@@ -144,7 +144,7 @@ class Compose extends React.Component {
 const mapStateToProps = state => ({
     currentBlogTitle: state.blogData.currentBlogTitle,
     currentBlogContent: state.blogData.currentBlogContent,
-    currentBlogPosts: state.blogData.currentBlogPosts
+    currentBlogPosts: state.blogData.posts
 });
 
 const mapDispatchToProps = dispatch => ({
