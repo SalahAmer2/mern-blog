@@ -1,8 +1,28 @@
 import React from 'react';
 
+import axios from "axios";
 import { connect } from "react-redux";
 
 class Home extends React.Component {
+
+    componentDidMount = () => {
+        this.getBlogPost();
+    };
+
+    getBlogPost = () => {
+        axios.get('/api')
+            .then((response) => {
+                const data = response.data;
+                this.props.currentBlogPosts_Action(
+                    data
+                )
+                console.log('Data has been received.')
+            })
+            .catch(() => {
+                alert('Error retrieving data.')
+            });
+    }
+
     render() {
         return (
             <div className="container">
