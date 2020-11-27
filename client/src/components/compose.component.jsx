@@ -33,26 +33,23 @@ class Compose extends React.Component {
     //         });
     // }
 
-    // componentDidMount = () => {
-    //     this.getBlogPost();
-    // };
+    componentDidMount = () => {
+        this.getBlogPost();
+    };
 
-    // getBlogPost = () => {
-    //     axios.get('/api')
-    //         .then((response) => {
-    //             const data = response.data;
-    //             this.props.currentBlogPosts(
-    //                 [
-    //                     ...this.props.currentBlogPosts,
-    //                     ...data
-    //                 ]
-    //             )
-    //             console.log('Data has been received.')
-    //         })
-    //         .catch(() => {
-    //             alert('Error retrieving data.')
-    //         });
-    // }
+    getBlogPost = () => {
+        axios.get('/api')
+            .then((response) => {
+                const data = response.data;
+                this.props.currentBlogPosts_Action(
+                    data
+                )
+                console.log('Data has been received.')
+            })
+            .catch(() => {
+                alert('Error retrieving data.')
+            });
+    }
 
     // handleChange = ({ target }) => {
     //     this.props.currentBlogTitle(
@@ -91,33 +88,30 @@ class Compose extends React.Component {
             ]
         )
 
-        // const payload = {
-        //     title: this.props.currentBlogTitle,
-        //     content: this.props.currentBlogContent
-        // }
+        const payload = {
+            title: this.title.current.value,
+            content: this.content.current.value
+        }
 
-        // axios({
-        //     url: '/api/save',
-        //     method: 'POST',
-        //     data: payload
-        // })
-        // .then(() => {
-        //     console.log('Data has been sent to the server');
-        //     // this.resetUserInputs();
-        //     // this.getBlogPost();
-        //     this.props.currentBlogPosts(
-        //         payload
-        //     )
-        // })
-        // .catch(() => {
-        //     console.log('Internal server error');
-        // });
+        axios({
+            url: '/api/save',
+            method: 'POST',
+            data: payload
+        })
+        .then(() => {
+            console.log('Data has been sent to the server');
+            // this.resetUserInputs();
+            this.getBlogPost();
+        })
+        .catch(() => {
+            console.log('Internal server error');
+        });
     }
 
     // resetUserInputs = () => {
-    //     this.props.currentBlogTitle('')
+    //     this.props.currentBlogPosts_Action(
 
-    //     this.props.currentBlogContent('')
+    //     )
     // }
 
     render() {
@@ -130,26 +124,47 @@ class Compose extends React.Component {
                 <form onSubmit={this.submit}>
                     <div className="form-group">
                         <label>Title</label>
-                        <input className="form-control" type="text" name="title" ref={this.title} />
+                        <input 
+                            className="form-control" 
+                            type="text" 
+                            name="title" 
+                            ref={this.title} 
+                            //value={this.props.currentBlogPosts.title}
+                        />
                         <label>Post</label>
-                        <textarea className="form-control" name="content" rows="5" cols="30" ref={this.content}></textarea>
+                        <textarea 
+                            className="form-control" 
+                            name="content" 
+                            rows="5" 
+                            cols="30" 
+                            ref={this.content} 
+                            //value={this.props.currentBlogPosts.title}
+                        >
+                        </textarea>
                     </div>
                     <button className="btn btn-primary" type="submit" name="button">Publish</button>
                 </form>
+                {
+                    this.props.currentBlogPosts.map((post, index) => (
+                        <div key={index}>
+                            <h1 >{post.title}</h1>
+                            <p>
+                                {post.content.substring(0, 100) + " ..."}
+                                <a href={`/posts/${index}`}>Read More</a>
+                            </p>
+                        </div>
+                    ))
+                }
             </div>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    currentBlogTitle: state.blogData.currentBlogTitle,
-    currentBlogContent: state.blogData.currentBlogContent,
     currentBlogPosts: state.blogData.posts
 });
 
 const mapDispatchToProps = dispatch => ({
-    // currentBlogTitle: (blogTitle) => dispatch(currentBlogTitle(blogTitle)),
-    // currentBlogContent: (blogContent) => dispatch(currentBlogContent(blogContent)),
     currentBlogPosts_Action: (blogPosts) => dispatch(currentBlogPosts(blogPosts))
 });
 
