@@ -6,7 +6,12 @@ const INITIAL_STATE = {
 
 const BlogDataReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case BlogDataActionTypes.POSTS:
+        case BlogDataActionTypes.FETCH_ALL_POSTS:
+            return {
+                ...state,
+                posts: action.payload
+            }
+        case BlogDataActionTypes.ADD_NEW_POSTS:
             return {
                 ...state,
                 posts: action.payload

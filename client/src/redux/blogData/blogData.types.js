@@ -1,5 +1,6 @@
 export const BlogDataActionTypes = {
-    POSTS: 'POSTS'
+    FETCH_ALL_POSTS: 'FETCH_ALL_POSTS',
+    ADD_NEW_POSTS: 'ADD_NEW_POSTS'
 }
 
 // export const BlogDataActionTypes = {

@@ -1,7 +1,12 @@
 import { BlogDataActionTypes } from "./blogData.types";
 
-export const currentBlogPosts = blogPosts => ({
-    type: BlogDataActionTypes.POSTS,
+export const fetchCurrentBlogPosts = blogPosts => ({
+    type: BlogDataActionTypes.FETCH_ALL_POSTS,
+    payload: blogPosts
+})
+
+export const addNewBlogPosts = blogPosts => ({
+    type: BlogDataActionTypes.ADD_NEW_POSTS,
     payload: blogPosts
 })
 

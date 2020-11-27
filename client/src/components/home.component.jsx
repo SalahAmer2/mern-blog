@@ -3,6 +3,8 @@ import React from 'react';
 import axios from "axios";
 import { connect } from "react-redux";
 
+import { fetchCurrentBlogPosts } from "../redux/blogData/blogData.actions";
+
 class Home extends React.Component {
 
     componentDidMount = () => {
@@ -13,9 +15,10 @@ class Home extends React.Component {
         axios.get('/api')
             .then((response) => {
                 const data = response.data;
-                this.props.currentBlogPosts_Action(
+                this.props.fetchCurrentBlogPosts_Action(
                     data
                 )
+                console.log(data)
                 console.log('Data has been received.')
             })
             .catch(() => {
@@ -50,4 +53,8 @@ const mapStateToProps = state => ({
     currentBlogPosts: state.blogData.posts
 });
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = dispatch => ({
+    fetchCurrentBlogPosts_Action: (blogPosts) => dispatch(fetchCurrentBlogPosts(blogPosts))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
