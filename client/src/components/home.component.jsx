@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { fetchCurrentBlogPosts } from "../redux/blogData/blogData.actions";
+import { deleteSingleBlogPost } from "../redux/blogData/blogData.actions";
 
 class Home extends React.Component {
 
@@ -27,6 +28,18 @@ class Home extends React.Component {
             });
     }
 
+    handleDelete = (postId) => {
+        axios.delete(`/api/post/${postId}/delete`)
+            .then((response) => {
+                // const data = response.data;
+                console.log(response);
+                this.props.deleteSingleBlogPost_Action(postId);
+            })
+            .catch((err) => {
+                console.log('error: ' + err);
+            })
+    }
+
     render() {
         return (
             <div className="container">
@@ -42,6 +55,7 @@ class Home extends React.Component {
                                 {post.content.substring(0, 100) + " ..."}
                                 <Link to={`/post/${post._id}`}>Read More</Link>
                             </p>
+                            <button className="btn btn-primary" onClick={() => this.handleDelete(post._id)} name="button">Delete</button>
                         </div>
                     ))
                 }
@@ -55,7 +69,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchCurrentBlogPosts_Action: (blogPosts) => dispatch(fetchCurrentBlogPosts(blogPosts))
+    fetchCurrentBlogPosts_Action: (blogPosts) => dispatch(fetchCurrentBlogPosts(blogPosts)),
+    deleteSingleBlogPost_Action: (postId) => dispatch(deleteSingleBlogPost(postId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

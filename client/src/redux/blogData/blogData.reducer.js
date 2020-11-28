@@ -22,6 +22,11 @@ const BlogDataReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 currentPost: action.payload
             }
+        case BlogDataActionTypes.DELETE_SINGLE_BLOG_POST:
+            return {
+                ...state,
+                posts: state.posts.filter(post => post._id !== action.payload)
+            }
         default:
             return state;
     }

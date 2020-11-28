@@ -15,6 +15,11 @@ export const getSingleBlogPost = blogPost => ({
     payload: blogPost
 })
 
+export const deleteSingleBlogPost = postId => ({
+    type: BlogDataActionTypes.DELETE_SINGLE_BLOG_POST,
+    payload: postId
+})
+
 // export const currentBlogTitle = blogData => ({
 //     type: BlogDataActionTypes.BLOG_DATA,
 //     payload: blogData
