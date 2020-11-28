@@ -20,7 +20,7 @@ function App() {
         <Route path='/about' component={About} />
         <Route path='/contact' component={Contact} />
         <Route path='/compose' component={Compose} />
-        <Post path='/post/:postId' component={Post} />
+        <Route exact path='/post/:postId' component={Post} />
       </Switch>
       <Footer />
       {/* <nav className="navbar navbar-default">

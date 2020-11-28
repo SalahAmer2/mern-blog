@@ -10,6 +10,11 @@ export const addNewBlogPosts = blogPosts => ({
     payload: blogPosts
 })
 
+export const getSingleBlogPost = blogPost => ({
+    type: BlogDataActionTypes.GET_SINGLE_BLOG_POST,
+    payload: blogPost
+})
+
 // export const currentBlogTitle = blogData => ({
 //     type: BlogDataActionTypes.BLOG_DATA,
 //     payload: blogData

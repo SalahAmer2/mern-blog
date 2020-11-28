@@ -40,7 +40,7 @@ class Home extends React.Component {
                             <h1 >{post.title}</h1>
                             <p>
                                 {post.content.substring(0, 100) + " ..."}
-                                <Link to={`/posts/${post._id}`}>Read More</Link>
+                                <Link to={`/post/${post._id}`}>Read More</Link>
                             </p>
                         </div>
                     ))

@@ -1,7 +1,8 @@
 import { BlogDataActionTypes } from "./blogData.types";
 
 const INITIAL_STATE = {
-    posts: []
+    posts: [],
+    currentPost: {}
 };
 
 const BlogDataReducer = (state = INITIAL_STATE, action) => {
@@ -15,6 +16,11 @@ const BlogDataReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 posts: action.payload
+            }
+        case BlogDataActionTypes.GET_SINGLE_BLOG_POST:
+            return {
+                ...state,
+                currentPost: action.payload
             }
         default:
             return state;
