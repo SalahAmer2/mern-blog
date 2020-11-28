@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
 
     Post.find({})
         .then((data) => {
-            console.log('Data: ', data);
+            // console.log('Data: ', data);
             res.json(data);
         })
         .catch((error) => {
@@ -47,8 +47,11 @@ router.post("/save", function (req, res) {
     newBlogPost.save((error) => {
         if (error) {
             res.status(500).json({ msg: 'Sorry, internal server error' });
+            console.log('There is an error I guess')
             return;
         }
+
+        console.log('It is reaching here')
 
         //Blogpost
         return res.json({
@@ -69,27 +72,32 @@ router.post("/save", function (req, res) {
     // });
 });
 
-// router.get("/posts/:postId", function (req, res) {
-//     const requestedPostId = req.params.postId;//For some reason using lodash here for lowercase causes an error
+router.get("/post/:postId", function (req, res) {
+    const requestedPostId = req.params.postId;//For some reason using lodash here for lowercase causes an error
+    console.log(requestedPostId);
 
-//     Post.findOne({ _id: requestedPostId }, function (err, post) {
-//         res.render("post", {
-//             title: post.title,
-//             content: post.content
-//         });
-//     });
+    Post.findById(requestedPostId)
+        .then((data) => {
+            console.log('Data: ', data);
+            console.log('requestedPostId: ', requestedPostId);
+            res.json(data);
+        })
+        .catch((error) => {
+            console.log('error: ', error);
+        });
+});
 
-// //     // posts.forEach(function(post){
-// //     //   const storedTitle = _.lowerCase(post.title);
-// //     //
-// //     //   if (storedTitle === requestedTitle) {
-// //     //     res.render("post", {
-// //     //       title: post.title,
-// //     //       content: post.content
-// //     //     });
-// //     //   }
-// //     // });
+router.delete("/post/:postId/delete", function (req, res) {
+    const requestedPostId = req.params.postId;//For some reason using lodash here for lowercase causes an error
+    console.log(requestedPostId);
 
-// });
+    Post.deleteOne({_id: requestedPostId})
+        .then(() => {
+            res.json("Post deleted successfully");
+        })
+        .catch((error) => {
+            console.log('error: ', error);
+        });
+});
 
 module.exports = router;
