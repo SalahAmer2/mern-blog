@@ -2,6 +2,7 @@ import React from 'react';
 
 import axios from "axios";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { fetchCurrentBlogPosts } from "../redux/blogData/blogData.actions";
 
@@ -39,7 +40,7 @@ class Home extends React.Component {
                             <h1 >{post.title}</h1>
                             <p>
                                 {post.content.substring(0, 100) + " ..."}
-                                <a href={`/posts/${index}`}>Read More</a>
+                                <Link to={`/posts/${post._id}`}>Read More</Link>
                             </p>
                         </div>
                     ))
