@@ -45,7 +45,12 @@ class Home extends React.Component {
             <div className="container">
                 <h1>Home</h1>
                 <p>
-                    Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.
+                    This is a MERN Stack Blog Website.
+                    You can add posts through the /compose path <strong><Link to={'/compose'}>here</Link></strong>.
+                    Posts are persistent since they are stored in the database.
+                    You can also click on "Read More" to see individual posts.
+                    You can delete posts with the "Delete" button as well.
+                    Furthermore, you can navigate to "HOME", "ABOUT US", and "CONTACT US" through their respective buttons in the Navigation Bar.
                 </p>
                 {
                     this.props.currentBlogPosts.map((post, index) => (

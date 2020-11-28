@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from "react-router-dom";
+
 export const Navbar = () => (
     <nav className="navbar navbar-default">
         <div className="container">
@@ -7,9 +9,9 @@ export const Navbar = () => (
                 <p className="navbar-brand">DAILY JOURNAL</p>
             </div>
             <ul className="nav navbar-nav navbar-right">
-                <li id="home"><a href="/">HOME</a></li>
-                <li id="about"><a href="/about">ABOUT US</a></li>
-                <li id="contact"><a href="/contact">CONTACT US</a></li>
+                <li id="home"><Link to={"/"}>HOME</Link></li>
+                <li id="about"><Link to={"/about"}>ABOUT US</Link></li>
+                <li id="contact"><Link to={"/contact"}>CONTACT US</Link></li>
             </ul>
         </div>
     </nav>
