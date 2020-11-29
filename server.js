@@ -22,7 +22,7 @@ app.use(morgan('tiny'));
 app.use('/api', routes);
 
 // Serve static assets if in production
-if(process.env.NODE_ENV === '') {
+if(process.env.NODE_ENV === 'production') {
     //Set static folder
     app.use(express.static('client/build'));
 
