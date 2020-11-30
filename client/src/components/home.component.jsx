@@ -55,7 +55,7 @@ class Home extends React.Component {
                 {
                     this.props.currentBlogPosts.map((post, index) => (
                         <div key={index}>
-                            <h1 >{post.title}</h1>
+                            <h2 >{post.title}</h2>
                             <p>
                                 {post.content.substring(0, 100) + " ..."}
                                 <Link to={`/post/${post._id}`}>Read More</Link>

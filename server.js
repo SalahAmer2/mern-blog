@@ -2,18 +2,20 @@ const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const path = require('path');
-const dotenv = require('dotenv');
-dotenv.config();
+const connectDB = require('./config/db');
 
 const app = express();
 
+// Connect Database
+connectDB();  
+
 const routes = require('./routes/api');
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/mernblog", { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/mernblog", { useNewUrlParser: true, useUnifiedTopology: true });
 
-mongoose.connection.on('connected', () => {
-    console.log('Mongoose is connected!');
-});
+// mongoose.connection.on('connected', () => {
+//     console.log('Mongoose is connected!');
+// });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
